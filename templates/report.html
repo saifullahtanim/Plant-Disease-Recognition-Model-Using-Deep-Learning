@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report • Plant Disease Recognition</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ cache_bust }}">
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+  <div class="container py-4">
+    <div class="d-flex align-items-center justify-content-between gap-3 mb-3 no-print">
+      <a class="btn btn-outline-secondary btn-sm" href="/">Back</a>
+      <button class="btn btn-primary btn-sm" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+          <div class="d-flex align-items-center gap-2">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" width="26" height="26">
+            <div class="fw-semibold">Plant Disease Recognition</div>
+          </div>
+          <div class="small text-muted">Report #{{ analysis.id }} • {{ analysis.created_at }}</div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-lg-4">
+            <div class="result-img-wrap">
+              <img src="{{ analysis.image_url }}" alt="Uploaded leaf" class="result-image" loading="lazy">
+            </div>
+          </div>
+          <div class="col-12 col-lg-8">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+              <span class="badge text-bg-success">Prediction</span>
+              <div class="h5 mb-0 fw-semibold">{{ analysis.prediction_name }}</div>
+              <span class="badge text-bg-light">{{ (analysis.confidence * 100) | round(1) }}%</span>
+            </div>
+
+            <div class="info-block mb-3">
+              <div class="info-title">Top Predictions</div>
+              <div class="table-responsive">
+                <table class="table table-sm mb-0">
+                  <thead>
+                    <tr>
+                      <th>Label</th>
+                      <th class="text-end">Confidence</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in analysis.top %}
+                    <tr>
+                      <td>{{ item.name }}</td>
+                      <td class="text-end">{{ (item.confidence * 100) | round(1) }}%</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="small text-muted">Note: Always follow local agriculture guidelines and label instructions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Disease Recognition</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/logo.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ cache_bust }}">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-dark-subtle">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="PHASAL" width="28" height="28">
+        <span class="fw-semibold">Plant Disease Recognition</span>
+      </a>
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="modal"
+          data-bs-target="#resourcesModal">
+          Resources
+        </button>
+        <button id="historyBtn" class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="collapse"
+          data-bs-target="#historyCollapse" aria-expanded="false" aria-controls="historyCollapse">
+          History
+        </button>
+        <button class="btn btn-outline-light btn-sm" type="button" data-bs-toggle="modal"
+          data-bs-target="#developerModal">
+          Developer
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="resourcesModal" tabindex="-1" aria-labelledby="resourcesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title" id="resourcesModalLabel">Resources</h5>
+            <div class="text-muted small">Project links and references</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="resource-grid mt-3">
+            <div class="resource-item">
+              <div class="resource-left">
+                <div class="resource-label">Dataset Source</div>
+                <div class="resource-meta">TensorFlow Datasets • PlantVillage</div>
+              </div>
+              <a class="btn btn-outline-secondary btn-sm resource-action" href="https://www.tensorflow.org/datasets/catalog/plant_village"
+                target="_blank" rel="noopener noreferrer">
+                <span>Open</span>
+                <svg class="resource-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3ZM5 5h7v2H7v10h10v-5h2v7H5V5Z" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="resource-item">
+              <div class="resource-left">
+                <div class="resource-label">Colab file</div>
+                <div class="resource-meta">Training notebook (Google Colab)</div>
+              </div>
+              <a class="btn btn-outline-secondary btn-sm resource-action" href="https://colab.research.google.com/drive/1apN8Bs57hnlhAJJDY1v0YFouvDhOp0VK"
+                target="_blank" rel="noopener noreferrer">
+                <span>Open</span>
+                <svg class="resource-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3ZM5 5h7v2H7v10h10v-5h2v7H5V5Z" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="resource-item">
+              <div class="resource-left">
+                <div class="resource-label">Model Trained</div>
+                <div class="resource-meta">Google Drive folder (exported model)</div>
+              </div>
+              <a class="btn btn-outline-secondary btn-sm resource-action"
+                href="https://drive.google.com/drive/folders/11Lv_7IuunEAlQ7I-Qp8L5E1r5HWgWtU0?usp=sharing" target="_blank"
+                rel="noopener noreferrer">
+                <span>Open</span>
+                <svg class="resource-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3ZM5 5h7v2H7v10h10v-5h2v7H5V5Z" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="resource-item">
+              <div class="resource-left">
+                <div class="resource-label">GitHub Repository</div>
+                <div class="resource-meta">Source code & documentation</div>
+              </div>
+              <a class="btn btn-outline-secondary btn-sm resource-action" href="https://github.com/saifullahtanim/Plant-Disease-Recognition-Model-Using-Deep-Learning"
+                target="_blank" rel="noopener noreferrer">
+                <span>Open</span>
+                <svg class="resource-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path fill="currentColor" d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3ZM5 5h7v2H7v10h10v-5h2v7H5V5Z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="developerModal" tabindex="-1" aria-labelledby="developerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title" id="developerModalLabel">Developers</h5>
+            <div class="text-muted small">Project contributors</div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-12 col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-3">
+                  <img class="dev-avatar mb-2" src="{{ url_for('static', filename='Develop/Tanim.png') }}"
+                    alt="Saifulla Tanim">
+                  <div class="fw-semibold">Saifulla Tanim</div>
+                  <div class="text-muted small">ID : 222002014</div>
+                  <div class="mt-2">
+                    <a class="btn btn-outline-secondary btn-sm dev-github" href="https://github.com/saifullahtanim"
+                      target="_blank" rel="noopener noreferrer">
+                      <svg class="dev-github-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                        <path fill="currentColor"
+                          d="M12 .6a11.4 11.4 0 0 0-3.6 22.2c.6.1.8-.2.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.6.8 1.9 1.3.8 1.3 2.2 1 2.8.7.1-.7.4-1.1.7-1.4-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.3 1.9-.4 2.8-.4s1.9.1 2.8.4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A11.4 11.4 0 0 0 12 .6Z" />
+                      </svg>
+                      <span class="ms-2">GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-3">
+                  <img class="dev-avatar mb-2" src="{{ url_for('static', filename='Develop/Mim.png') }}"
+                    alt="Mim Akter">
+                  <div class="fw-semibold">Mim Akter</div>
+                  <div class="text-muted small">ID : 222002014</div>
+                  <div class="mt-2">
+                    <a class="btn btn-outline-secondary btn-sm dev-github" href="https://github.com/mimAkter31/"
+                      target="_blank" rel="noopener noreferrer">
+                      <svg class="dev-github-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                        <path fill="currentColor"
+                          d="M12 .6a11.4 11.4 0 0 0-3.6 22.2c.6.1.8-.2.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.6.8 1.9 1.3.8 1.3 2.2 1 2.8.7.1-.7.4-1.1.7-1.4-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.3 1.9-.4 2.8-.4s1.9.1 2.8.4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A11.4 11.4 0 0 0 12 .6Z" />
+                      </svg>
+                      <span class="ms-2">GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-3">
+                  <img class="dev-avatar mb-2" src="{{ url_for('static', filename='Develop/Rakib.png') }}"
+                    alt="Md Rakib Khan">
+                  <div class="fw-semibold">Md Rakib Khan</div>
+                  <div class="text-muted small">ID : 222002020</div>
+                  <div class="mt-2">
+                    <a class="btn btn-outline-secondary btn-sm dev-github" href="https://github.com/rakib"
+                      target="_blank" rel="noopener noreferrer">
+                      <svg class="dev-github-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                        <path fill="currentColor"
+                          d="M12 .6a11.4 11.4 0 0 0-3.6 22.2c.6.1.8-.2.8-.6v-2.2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1 1.6.8 1.9 1.3.8 1.3 2.2 1 2.8.7.1-.7.4-1.1.7-1.4-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2.9-.3 1.9-.4 2.8-.4s1.9.1 2.8.4c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.6-2.7 5.6-5.3 5.9.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A11.4 11.4 0 0 0 12 .6Z" />
+                      </svg>
+                      <span class="ms-2">GitHub</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div id="uiAlert" class="alert {% if error %}alert-danger{% else %}d-none{% endif %}" role="alert" aria-live="polite">{% if error %}{{ error }}{% endif %}</div>
+
+          <div class="card shadow-sm border-0 upload-card">
+            <div class="card-body p-4 p-md-5">
+              <div class="row g-4 align-items-center">
+                <div class="col-12 col-lg-6">
+                  <h2 class="h4 fw-semibold mb-3">Upload Image</h2>
+                  <form id="uploadForm" action="{{ url_for('uploadimage') }}" method="POST"
+                    enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="img" class="form-label">Choose JPG/PNG file</label>
+                      <input id="img" class="form-control" type="file" accept="image/png, image/jpeg" name="img" aria-describedby="uploadHelp uploadHelp2" required>
+                      <div id="uploadHelp" class="form-text">Tip: use a well-lit close-up for best results.</div>
+                      <div id="uploadHelp2" class="form-text">You can also drag & drop or paste an image anywhere on this page.</div>
+                      <div id="qualityHint" class="form-text"></div>
+                    </div>
+
+                    <div class="d-flex gap-2 align-items-center">
+                      <button id="submitBtn" type="submit" class="btn btn-success px-4">
+                        <span class="btn-label">Analyze</span>
+                        <span class="btn-spinner spinner-border spinner-border-sm ms-2 d-none"
+                          aria-hidden="true"></span>
+                      </button>
+                      <a class="btn btn-outline-secondary" href="/">Reset</a>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                  <div class="preview-card">
+                    <div class="preview-title">Preview</div>
+                    <div class="preview-body">
+                      <img id="previewImg" class="preview-img d-none" alt="Preview">
+                      <div id="previewPlaceholder" class="text-muted small">
+                        Select an image to see preview here.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="collapse mt-3" id="historyCollapse">
+            <div class="card border-0 shadow-sm history-card">
+              <div class="card-body p-4">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                  <h2 class="h5 fw-semibold mb-0">Analysis History</h2>
+                  <div id="historySource" class="small text-muted">Saved on server</div>
+                </div>
+                <div id="historyLoading" class="text-muted small d-none">Loading history...</div>
+                <div id="historyEmpty" class="text-muted small">No history yet. Run an analysis to see it here.</div>
+                <div id="historyList" class="list-group list-group-flush d-none"></div>
+              </div>
+            </div>
+          </div>
+
+          {% if error and not result %}
+          <div class="card border-0 shadow-sm mt-3">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-start gap-3">
+                <div class="flex-grow-1">
+                  <div class="fw-semibold mb-1">Upload failed</div>
+                  <div class="text-muted small">{{ error }}</div>
+                  <div class="text-muted small mt-2">Try: a clear leaf photo, JPG/PNG format, and under 8MB.</div>
+                </div>
+                <a class="btn btn-outline-secondary btn-sm" href="/">Reset</a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if result %}
+          <div class="card border-0 shadow-sm mt-4 result-card">
+            <div class="card-body p-4">
+              <div class="row g-4 align-items-start">
+                <div class="col-12 col-lg-4">
+                  <div class="result-img-wrap">
+                    <img id="resultImage" src="{{ imagepath }}" alt="Uploaded leaf" class="result-image" loading="lazy">
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                    <span class="badge text-bg-success">Prediction</span>
+                    <h3 class="h5 fw-semibold mb-0" id="resultName">{{ prediction['name'] }}</h3>
+                    <span class="badge text-bg-light">{{ (prediction['confidence'] * 100) | round(1) }}%</span>
+                  </div>
+
+                  <div class="progress mb-3" style="height: 8px;">
+                    <div class="progress-bar bg-success" role="progressbar"
+                      style="width: {{ (prediction['confidence'] * 100) | round(1) }}%" aria-valuenow="{{ (prediction['confidence'] * 100) | round(1) }}"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+
+                  <div class="d-flex flex-wrap gap-2 mb-3">
+                    {% if analysis_id %}
+                    <a class="btn btn-outline-secondary btn-sm" href="/report/{{ analysis_id }}" target="_blank"
+                      rel="noopener noreferrer">
+                      Download Report
+                    </a>
+                    {% endif %}
+                    <div class="small text-muted align-self-center">
+                      {% if analysis_id %}Report #{{ analysis_id }}{% endif %}
+                      {% if created_at %} • Analyzed at: {{ created_at|replace('T', ' ')|replace('+00:00', ' UTC') }}{% endif %}
+                    </div>
+                  </div>
+
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <div class="info-block">
+                        <div class="info-title">Cause</div>
+                        <div class="info-text">{{ prediction['cause'] }}</div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="info-block">
+                        <div class="info-title">Cure</div>
+                        <div class="info-text">{{ prediction['cure'] }}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% set pred_name = prediction['name']|string %}
+                  {% set pred_lower = pred_name|lower %}
+                  {% set is_background = (pred_name == 'Background_without_leaves') %}
+                  {% set is_healthy = (not is_background) and ('healthy' in pred_lower) %}
+                  {% set search_name = pred_name|replace('___', ' ')|replace('_', ' ') %}
+
+                  {% if not is_background and not is_healthy %}
+                  <div class="solution-box mt-3">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+                      <div class="solution-title">Recommended Actions</div>
+                      <a class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm btn-solution" target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://www.google.com/search?q={{ (search_name ~ ' disease treatment solution')|urlencode }}">
+                        Search Google
+                      </a>
+                    </div>
+                    <div class="solution-body">
+                      <div class="solution-text">{{ prediction['cure'] }}</div>
+                      <div class="solution-hint small text-muted mt-2">For best results, follow local agriculture
+                        guidelines and label instructions for any product.</div>
+                    </div>
+                  </div>
+                  {% elif is_healthy %}
+                  <div class="solution-box mt-3">
+                    <div class="solution-title">Status</div>
+                    <div class="solution-body">
+                      <div class="solution-text">Looks healthy. {{ prediction['cure'] }}</div>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="solution-box mt-3">
+                    <div class="solution-title">Status</div>
+                    <div class="solution-body">
+                      <div class="solution-text">No leaf detected in the image. Please upload a clear leaf photo.</div>
+                    </div>
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}?v={{ cache_bust }}"></script>
+</body>
+
+</html>

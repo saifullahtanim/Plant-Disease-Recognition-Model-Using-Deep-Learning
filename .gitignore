@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+
+# model files (important 🔥)
+models/
+*.keras
+
+# uploads & database
+uploadimages/
+analysis.sqlite3
+
+# optional
+.DS_Store
+.env
